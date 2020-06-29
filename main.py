@@ -59,6 +59,8 @@ if __name__ == '__main__':
 
     while True:
         dt_now = datetime.datetime.now()
+        if datetime.date.today().weekday() in [5,6]: #Sat or Sun
+            continue
         if dt_now.hour == start_time.hour and dt_now.minute == start_time.minute:
             operator.syukkin()
         elif dt_now.hour == end_time.hour and dt_now.minute == end_time.minute:
