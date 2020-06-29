@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 import datetime
+import jpholiday
 import time
 
 
@@ -42,6 +43,12 @@ class AutoMFKintai():
     def release(self):
         self.driver.quit()
 
+def is_weekday(date):
+    if date.weekday() >= 5 or jpholiday.is_holiday(date):
+        return False
+    else:
+        return True
+
 
 if __name__ == '__main__':
     start_time = datetime.time(10, 0)
@@ -59,7 +66,7 @@ if __name__ == '__main__':
 
     while True:
         dt_now = datetime.datetime.now()
-        if datetime.date.today().weekday() in [5,6]: #Sat or Sun
+        if not is_weekday(datetime.date.today()): #平日判断
             continue
         if dt_now.hour == start_time.hour and dt_now.minute == start_time.minute:
             operator.syukkin()
