@@ -1,16 +1,34 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
 import datetime
 import jpholiday
 import time
+import argparse
+
+
+def command_options():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--headless", type=bool, default=False)
+
+    return parser.parse_args()
+
+
+def driver_options(parser):
+    options = Options()
+    if parser.headless:
+        options.add_argument("--headless")
+
+    return options
 
 
 class AutoMFKintai():
-    def __init__(self, login_info):
-        self.URL = "https://attendance.moneyforward.com/my_page"
-        self.driver = webdriver.Chrome()
-        self.driver.set_window_size(*(960, 540))
-        self.driver.get(self.URL)
+    def __init__(self, login_info, driver_options):
+        URL = "https://attendance.moneyforward.com/my_page"
+        driver = webdriver.Chrome(options=driver_options)
+        driver.set_window_size(*(960, 540))
+        driver.get(URL)
+        self.driver = driver
         self.company_id = login_info["COMPANY_ID"]
         self.mail = login_info["MAIL"]
         self.password = login_info["PASSWORD"]
@@ -43,6 +61,7 @@ class AutoMFKintai():
     def release(self):
         self.driver.quit()
 
+
 def is_weekday(date):
     if date.weekday() >= 5 or jpholiday.is_holiday(date):
         return False
@@ -51,6 +70,8 @@ def is_weekday(date):
 
 
 if __name__ == '__main__':
+    parser = command_options()
+
     start_time = datetime.time(10, 0)
     end_time = datetime.time(18, 45)
 
@@ -60,13 +81,14 @@ if __name__ == '__main__':
         login_info["MAIL"] = f.readline().rstrip()
         login_info["PASSWORD"] = f.readline().rstrip()
 
-    operator = AutoMFKintai(login_info)
+    driver_options = driver_options(parser)
+    operator = AutoMFKintai(login_info, driver_options)
 
     operator.login()
 
     while True:
         dt_now = datetime.datetime.now()
-        if not is_weekday(datetime.date.today()): #平日判断
+        if not is_weekday(datetime.date.today()):  # 平日判断
             continue
         if dt_now.hour == start_time.hour and dt_now.minute == start_time.minute:
             operator.syukkin()
