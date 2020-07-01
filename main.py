@@ -69,8 +69,8 @@ class AutoMFKintai():
         self.driver.quit()
 
 
-def is_weekday(date):
-    return not(date.weekday() >= 5 or jpholiday.is_holiday(date))
+def is_holiday(date):
+    return date.weekday() >= 5 or jpholiday.is_holiday(date)
 
 
 if __name__ == '__main__':
@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
     while True:
         dt_now = datetime.datetime.now()
-        if not is_weekday(datetime.date.today()):  # 平日判断
+        if is_holiday(datetime.date.today()):  # 平日判断
             continue
         if dt_now.hour == start_time.hour and dt_now.minute == start_time.minute:
             operator.syukkin()
