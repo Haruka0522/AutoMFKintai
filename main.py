@@ -70,10 +70,7 @@ class AutoMFKintai():
 
 
 def is_weekday(date):
-    if date.weekday() >= 5 or jpholiday.is_holiday(date):
-        return False
-    else:
-        return True
+    return not(date.weekday() >= 5 or jpholiday.is_holiday(date))
 
 
 if __name__ == '__main__':
