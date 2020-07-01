@@ -1,3 +1,4 @@
+import selenium
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
@@ -47,16 +48,22 @@ class AutoMFKintai():
         login_button.click()
 
     def syukkin(self):
-        actions = ActionChains(self.driver)
-        actions.move_by_offset(480, 250)
-        actions.click()
-        actions.perform()
+        try:
+            actions = ActionChains(self.driver)
+            actions.move_by_offset(480, 250)
+            actions.click()
+            actions.perform()
+        except selenium.common.exceptions.MoveTargetOutOfBoundsException:
+            pass
 
     def taikin(self):
-        actions = ActionChains(self.driver)
-        actions.move_by_offset(600, 250)
-        actions.click()
-        actions.perform()
+        try:
+            actions = ActionChains(self.driver)
+            actions.move_by_offset(600, 250)
+            actions.click()
+            actions.perform()
+        except selenium.common.exceptions.MoveTargetOutOfBoundsException:
+            pass
 
     def release(self):
         self.driver.quit()
