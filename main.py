@@ -53,6 +53,7 @@ class AutoMFKintai():
             actions.move_by_offset(480, 250)
             actions.click()
             actions.perform()
+            time.sleep(60)
         except selenium.common.exceptions.MoveTargetOutOfBoundsException:
             pass
 
@@ -62,6 +63,7 @@ class AutoMFKintai():
             actions.move_by_offset(600, 250)
             actions.click()
             actions.perform()
+            time.sleep(60)
         except selenium.common.exceptions.MoveTargetOutOfBoundsException:
             pass
 
