@@ -96,7 +96,9 @@ if __name__ == '__main__':
             continue
         if dt_now.hour == start_time.hour and dt_now.minute == start_time.minute:
             operator.syukkin()
+            print(f"{dt_now}出勤しました")
         elif dt_now.hour == end_time.hour and dt_now.minute == end_time.minute:
             operator.taikin()
+            print(f"{dt_now}退勤しました")
         else:
             time.sleep(30)
