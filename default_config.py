@@ -12,7 +12,7 @@ def get_default_config():
 
     # 勤務時間
     cfg.attendance = CN()
-    cfg.attendance.start = "10:00"
-    cfg.attendance.end = "18:45"
+    cfg.attendance.start = [10,0]
+    cfg.attendance.end = [18,45]
 
     return cfg
