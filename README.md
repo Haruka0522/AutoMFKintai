@@ -5,7 +5,7 @@
 - ChromeDriver(Chromeのバージョンに適したもの）
 - Python 3.7.6
 
-    
+
 ## 初期設定
 - 環境構築
 ```
@@ -15,18 +15,21 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
-- ログイン情報ファイルの作成
+- configファイルの作成
+yaml形式で記載する。
+`config/sample.yml`を参考にログインに必要な情報や、出勤/退勤時刻を記載する。
 
-AutoMFKintaiディレクトリ直下に`pass.txt`を作成。
+### 注意
+myconfig.ymlという名前で作成するとgitの管理から除外される。その他の名前でconfigファイルを作成するときには`.gitignore`にファイル名を追加して、パスワードなどがgithubに公開されないように注意する。
 
-１行目に会社ID
 
-２行目にメールアドレス
-
-３行目にパスワードを記載する。
-
-    
 ## 実行方法
 ```
 python main.py
 ```
+
+### 実行オプション
+- `--headless`
+  - このオプションをつけるとchromeの起動がバックグラウンドで行われる
+- `--config_file`
+  - configファイルのパスを指定する
