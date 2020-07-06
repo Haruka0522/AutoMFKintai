@@ -10,7 +10,7 @@ import argparse
 
 def command_options():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--headless", type=bool, default=False)
+    parser.add_argument("--headless", action="store_true")
 
     return parser.parse_args()
 
