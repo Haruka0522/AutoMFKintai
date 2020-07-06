@@ -1,4 +1,3 @@
-pass.txt
 venv/*
 *__pycache__*
 config/myconfig.yml
