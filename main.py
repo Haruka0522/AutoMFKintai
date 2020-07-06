@@ -6,11 +6,13 @@ import datetime
 import jpholiday
 import time
 import argparse
+from default_config import get_default_config
 
 
 def command_options():
     parser = argparse.ArgumentParser()
     parser.add_argument("--headless", type=bool, default=False)
+    parser.add_argument("--config_file", type=str, default=None)
 
     return parser.parse_args()
 
@@ -30,9 +32,9 @@ class AutoMFKintai():
         driver.set_window_size(*(960, 540))
         driver.get(URL)
         self.driver = driver
-        self.company_id = login_info["COMPANY_ID"]
-        self.mail = login_info["MAIL"]
-        self.password = login_info["PASSWORD"]
+        self.company_id = login_info["companyid"]
+        self.mail = login_info["email"]
+        self.password = login_info["password"]
 
     def login(self):
         id_box = self.driver.find_element_by_name("employee_session_form[office_account_name]")
@@ -76,14 +78,14 @@ def is_weekday(date):
 if __name__ == '__main__':
     parser = command_options()
 
-    start_time = datetime.time(10, 0)
-    end_time = datetime.time(18, 45)
+    cfg = get_default_config()
+    if parser.config_file:
+        cfg.merge_from_file(parser.config_file)
 
-    with open("pass.txt") as f:
-        login_info = dict()
-        login_info["COMPANY_ID"] = f.readline().rstrip()
-        login_info["MAIL"] = f.readline().rstrip()
-        login_info["PASSWORD"] = f.readline().rstrip()
+    start_time = datetime.time(*cfg.attendance.start)
+    end_time = datetime.time(*cfg.attendance.end)
+
+    login_info = cfg.user
 
     driver_options = driver_options(parser)
     operator = AutoMFKintai(login_info, driver_options)
