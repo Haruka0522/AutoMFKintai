@@ -34,3 +34,6 @@ AutoMFKintaiディレクトリ直下に`pass.txt`を作成。
 ```
 python main.py
 ```
+
+## 実行オプション
+- `--headless`をつけるとheadlessモードで実行
