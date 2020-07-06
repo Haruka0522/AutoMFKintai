@@ -1,0 +1,8 @@
+user:
+  companyid: "ABCCOMPANY"
+  email: "user1@email.com"
+  password: "password"
+
+attendance:
+  start: "8:30"
+  end: "18:00"
