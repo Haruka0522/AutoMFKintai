@@ -11,7 +11,7 @@ from default_config import get_default_config
 
 def command_options():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--headless", type=bool, default=False)
+    parser.add_argument("--headless", action="store_true")
     parser.add_argument("--config_file", type=str, default=None)
 
     return parser.parse_args()
@@ -55,6 +55,7 @@ class AutoMFKintai():
             actions.move_by_offset(480, 250)
             actions.click()
             actions.perform()
+            time.sleep(60)
         except selenium.common.exceptions.MoveTargetOutOfBoundsException:
             pass
 
@@ -64,6 +65,7 @@ class AutoMFKintai():
             actions.move_by_offset(600, 250)
             actions.click()
             actions.perform()
+            time.sleep(60)
         except selenium.common.exceptions.MoveTargetOutOfBoundsException:
             pass
 
@@ -71,8 +73,8 @@ class AutoMFKintai():
         self.driver.quit()
 
 
-def is_weekday(date):
-    return not(date.weekday() >= 5 or jpholiday.is_holiday(date))
+def is_holiday(date):
+    return date.weekday() >= 5 or jpholiday.is_holiday(date)
 
 
 if __name__ == '__main__':
@@ -94,11 +96,13 @@ if __name__ == '__main__':
 
     while True:
         dt_now = datetime.datetime.now()
-        if not is_weekday(datetime.date.today()):  # 平日判断
+        if is_holiday(datetime.date.today()):  # 平日判断
             continue
         if dt_now.hour == start_time.hour and dt_now.minute == start_time.minute:
             operator.syukkin()
+            print(f"{dt_now}出勤しました")
         elif dt_now.hour == end_time.hour and dt_now.minute == end_time.minute:
             operator.taikin()
+            print(f"{dt_now}退勤しました")
         else:
             time.sleep(30)

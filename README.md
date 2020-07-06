@@ -1,5 +1,9 @@
 # AutoMFKintai
 
+## 特徴
+- 毎日同じ時刻に打刻をするという煩わしい行動から開放される
+- **悪用厳禁**
+
 ## 環境
 - GoogleChrome
 - ChromeDriver(Chromeのバージョンに適したもの）
