@@ -55,7 +55,6 @@ class AutoMFKintai():
             actions.move_by_offset(480, 250)
             actions.click()
             actions.perform()
-            time.sleep(60)
         except selenium.common.exceptions.MoveTargetOutOfBoundsException:
             pass
 
@@ -65,7 +64,6 @@ class AutoMFKintai():
             actions.move_by_offset(600, 250)
             actions.click()
             actions.perform()
-            time.sleep(60)
         except selenium.common.exceptions.MoveTargetOutOfBoundsException:
             pass
 
@@ -101,8 +99,10 @@ if __name__ == '__main__':
         if dt_now.hour == start_time.hour and dt_now.minute == start_time.minute:
             operator.syukkin()
             print(f"{dt_now}出勤しました")
+            time.sleep(60)
         elif dt_now.hour == end_time.hour and dt_now.minute == end_time.minute:
             operator.taikin()
             print(f"{dt_now}退勤しました")
+            time.sleep(60)
         else:
             time.sleep(30)
