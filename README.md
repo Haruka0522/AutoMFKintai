@@ -11,7 +11,18 @@
 
 
 ## 初期設定
-- 環境構築
+- ラズパイで動かす場合
+```
+git clone https://github.com/Haruka0522/AutoMFKintai.git
+cd AutoMFKintai
+chmod +x raspi_setup.sh
+./raspi_setup.sh
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+- その他の場合
 ```
 git clone https://github.com/Haruka0522/AutoMFKintai.git
 cd AutoMFKintai
@@ -19,6 +30,7 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
 - configファイルの作成
 yaml形式で記載する。
 `config/sample.yml`を参考にログインに必要な情報や、出勤/退勤時刻を記載する。
