@@ -11,8 +11,8 @@ from default_config import get_default_config
 
 def command_options():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--headless", action="store_true")
-    parser.add_argument("--config_file", type=str, default=None)
+    parser.add_argument("-H", "--headless", action="store_true")
+    parser.add_argument("--config_file", type=str, default="config/myconfig.yml")
 
     return parser.parse_args()
 

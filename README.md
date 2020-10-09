@@ -47,5 +47,7 @@ python main.py
 ### 実行オプション
 - `--headless`
   - このオプションをつけるとchromeの起動がバックグラウンドで行われる
+  - 短縮形`-H`でも可
 - `--config_file`
   - configファイルのパスを指定する
+  - defaultは`config/myconfig.yml`
